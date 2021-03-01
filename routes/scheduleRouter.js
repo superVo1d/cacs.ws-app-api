@@ -148,9 +148,9 @@ scheduleRouter.route('/')
 									if (id !== '0') {
 									    teachersArray.push({
 											"cacs_id": parseInt(id),
-											"last_name": teachers[i].teachers.split(' ')[0],
-											"name": teachers[i].teachers.split(' ')[1],
-											"patronymic": teachers[i].teachers.split(' ')[2],
+											"last_name": teachers[i].teachers.split(', ')[j].split(' ')[0],
+											"name": teachers[i].teachers.split(', ')[j].split(' ')[1],
+											"patronymic": teachers[i].teachers.split(', ')[j].split(' ')[2],
 											"status": "t"
 									    });
 									  }
@@ -210,13 +210,13 @@ scheduleRouter.route('/')
 							'month': date.getMonth(),
 							'year': date.getFullYear(),
 							'place': schedule[i].place,
-							'teacher': schedule[i].teachers_array.reduce((teachersArray, id) => {
+							'teacher': schedule[i].teachers_array.reduce((teachersArray, id, j) => {
 								if (id !== '0') {
 								    teachersArray.push({
 										"cacs_id": parseInt(id),
-										"last_name": schedule[i].teachers.split(' ')[0],
-										"name": schedule[i].teachers.split(' ')[1],
-										"patronymic": schedule[i].teachers.split(' ')[2],
+										"last_name": schedule[i].teachers.split(', ')[j].split(' ')[0],
+										"name": schedule[i].teachers.split(', ')[j].split(' ')[1],
+										"patronymic": schedule[i].teachers.split(', ')[j].split(' ')[2],
 										"status": "t"
 								    });
 								  }
