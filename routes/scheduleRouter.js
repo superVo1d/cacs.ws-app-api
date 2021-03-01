@@ -140,11 +140,11 @@ scheduleRouter.route('/')
 								'hours': parseInt(time.split(':')[0]),
 								'minutes': parseInt(time.split(':')[1]),
 								'type': schedule[i].type,
-								'day': date.getDay(),
+								'day': date.getDate(),
 								'month': date.getMonth(),
 								'year': date.getFullYear(),
 								'place': schedule[i].place,
-								'teacher': teachers[i] ? teachers[i].teachersid.split(';').reduce((teachersArray, id, i) => {
+								'teacher': teachers[i] ? teachers[i].teachersid.split(';').reduce((teachersArray, id, j) => {
 									if (id !== '0') {
 									    teachersArray.push({
 											"cacs_id": parseInt(id),
@@ -206,7 +206,7 @@ scheduleRouter.route('/')
 							'hours': time.split(':')[0],
 							'minutes': time.split(':')[1],
 							'type': schedule[i].type,
-							'day': date.getDay(),
+							'day': date.getDate(),
 							'month': date.getMonth(),
 							'year': date.getFullYear(),
 							'place': schedule[i].place,
