@@ -203,8 +203,8 @@ scheduleRouter.route('/')
 						return {
 							'name': schedule[i].subject,
 							'short_name': schedule[i].subject,
-							'hours': time.split(':')[0],
-							'minutes': time.split(':')[1],
+							'hours': parseInt(time.split(':')[0]),
+							'minutes': parseInt(time.split(':')[1]),
 							'type': schedule[i].type,
 							'day': date.getDate(),
 							'month': date.getMonth(),
