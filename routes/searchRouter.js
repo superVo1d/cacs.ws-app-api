@@ -18,7 +18,7 @@ searchRouter.route('/')
 
 	Users.aggregate([
   		{
-  			$match: { name: {$regex: query}}
+  			$match: { working_name: {$regex: query}}
   		}
 	]).limit(lim || 7)
 	.then((students) => {
@@ -28,7 +28,7 @@ searchRouter.route('/')
 			.map((v, i) => {
 				return {
 					"cacs_id": students[i].id,
-			    	"name": students[i].name,
+			    	"name": students[i].working_name,
 			    	"status": students[i].role === 'student' ? 's' : 't'
 				}
 			})

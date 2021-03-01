@@ -10,6 +10,10 @@ const usersSchema = new Schema({
 		type: String,
 		required: true
 	},
+	working_name: {
+		type: String,
+		required: true
+	},
 	role: {
 		type: String,
 		required: true

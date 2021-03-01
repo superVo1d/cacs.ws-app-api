@@ -20,13 +20,15 @@ userExistsRouter.route('/')
 	}).then((user) => {
 		res.setHeader('Content-Type', 'application/json');
 
-		if (user) {		
+		if (user) {
+
+			const nameComponents = user.working_name.split(' ');		
 			res.statusCode = 200;
 			res.json({
 			    "cacs_id": user.id,
-			    "last_name": user.name.split(' ')[0],
-			    "name": user.name.split(' ')[1],
-			    "patronymic": typeof user.name.split(' ')[2] === 'undefined' ? '' : user.name.split(' ')[2],
+			    "last_name": nameComponents[0],
+			    "name": nameComponents[1],
+			    "patronymic": typeof nameComponents[2] === 'undefined' ? '' : nameComponents[2],
 			    "status": user.role === 'student' ? 's' : 't'
 			});
 		} else {

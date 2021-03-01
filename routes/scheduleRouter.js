@@ -3,9 +3,9 @@ const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
 
 const Users = require('../models/users.js')
-const Colors = require('../models/colors.js')
 const Teachers_schedule = require('../models/teachers_schedule.js')
 const Students_schedule = require('../models/students_schedule.js')
+const Time_updated = require('../models/time_updated.js')
 
 const scheduleRouter = express.Router()
 
@@ -115,8 +115,6 @@ scheduleRouter.route('/')
 			})
 			.then((schedule) => {
 
-				console.log(schedule, datesOfWeek);
-
 				const teachers = new Array(schedule.length)
 					.fill()
 					.map((v, i) => Teachers_schedule.findOne({
@@ -159,11 +157,19 @@ scheduleRouter.route('/')
 							}
 						})
 
-					res.statusCode = 200;
-					res.setHeader('Content-Type', 'application/json');
-					res.json({
-						'schedule': weekSchedule,
-						'refresh_time': null
+					Time_updated.findOne()
+					.then((timestamp) => {
+
+						res.statusCode = 200;
+						res.setHeader('Content-Type', 'application/json');
+						res.json({
+							'schedule': weekSchedule,
+							'refresh_time': timestamp.time
+						});
+
+					}, (err) => next(err))
+					.catch((err) => {
+						next(err);
 					});	
 
 				}, (err) => next(err))
@@ -225,11 +231,19 @@ scheduleRouter.route('/')
 						}
 					})
 
-				res.statusCode = 200;
-				res.setHeader('Content-Type', 'application/json');
-				res.json({
-					'schedule': weekSchedule,
-					'refresh_time': null
+				Time_updated.findOne()
+				.then((timestamp) => {
+
+					res.statusCode = 200;
+					res.setHeader('Content-Type', 'application/json');
+					res.json({
+						'schedule': weekSchedule,
+						'refresh_time': timestamp.time
+					});
+
+				}, (err) => next(err))
+				.catch((err) => {
+					next(err);
 				});	
 
 			}, (err) => next(err))
