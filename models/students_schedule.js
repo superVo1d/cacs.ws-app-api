@@ -43,7 +43,7 @@ const students_scheduleSchema = new Schema({
 		required: false
 	}
 }, {
-	collection: 'students_schedule'
+	collection: 'all_students_schedule'
 });
 
 var Students_schedule = mongoose.model('Students_schedule', students_scheduleSchema);
