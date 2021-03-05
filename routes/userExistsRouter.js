@@ -22,7 +22,7 @@ userExistsRouter.route('/')
 
 		if (user) {
 
-			const nameComponents = user.working_name.split(' ');		
+			const nameComponents = user.working_name.replace(/\s{2,}/g, ' ').split(' ');		
 			res.statusCode = 200;
 			res.json({
 			    "cacs_id": user.id,
