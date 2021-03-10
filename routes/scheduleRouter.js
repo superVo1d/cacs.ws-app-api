@@ -115,15 +115,29 @@ scheduleRouter.route('/')
 			})
 			.then((schedule) => {
 
-				const teachers = new Array(schedule.length)
+				let teachers = new Array(schedule.length)
 					.fill()
-					.map((v, i) => Teachers_schedule.findOne({
-						'date': schedule[i].date,
-						'time': schedule[i].time,
-						'place': schedule[i].place
-					}))
+					.map((v, i) => Teachers_schedule.aggregate([
+						{
+							$set: {
+								'groups': {$split: ['$groups', ',']}
+							}
+						},
+						{
+							$match: { 
+								'date': schedule[i].date,
+								'time': schedule[i].time,
+								'place': schedule[i].place,
+								'groups': schedule[i].group
+							}
+						}
+					]))
 
 				Promise.all(teachers).then((teachers) => {
+
+					teachers = teachers.map(teacherArr => teacherArr[0])
+
+					//console.log(teachers)
 
 					const weekSchedule = new Array(schedule.length)
 						.fill()

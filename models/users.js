@@ -10,6 +10,10 @@ const usersSchema = new Schema({
 		type: String,
 		required: true
 	},
+	group: {
+		type: String,
+		required: false
+	},
 	working_name: {
 		type: String,
 		required: true

@@ -20,7 +20,7 @@ searchRouter.route('/')
   		{
   			$match: { working_name: {$regex: query}}
   		}
-	]).limit(lim || 7)
+	]).collation({locale: "ru" }).sort({name:'asc'}).limit(lim || 7)
 	.then((students) => {
 
 		const results = new Array(students.length)
